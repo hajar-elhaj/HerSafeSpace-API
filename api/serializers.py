@@ -2,21 +2,36 @@ from rest_framework import serializers
 from .models import MoodEntry, SelfCare, AnonymousPost, Comment
 
 class MoodEntrySerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())  #user field is hidden from being manually set or edited and it's automatically set to whoever is logged in
+
     class Meta:
         model = MoodEntry
-        fields = '__all__'
+        fields = ['id', 'user', 'mood', 'note', 'created_at']
+        read_only_fields = ['id', 'created_at'] # These fields cannot be modified by the client.
+
 
 class SelfCareSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = SelfCare
-        fields = '__all__'
+        fields = ['id', 'user', 'activity', 'category', 'created_at']
+        read_only_fields = ['id', 'created_at']
+
 
 class AnonymousPostSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = AnonymousPost
-        fields = '__all__'
+        fields = ['id', 'user', 'category', 'content', 'created_at']
+        read_only_fields = ['id', 'created_at']
+
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['id', 'post', 'user', 'content', 'created_at']
+        read_only_fields = ['id', 'created_at']
