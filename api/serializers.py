@@ -7,7 +7,7 @@ class MoodEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = MoodEntry
         fields = ['id', 'user', 'mood', 'note', 'created_at']
-        read_only_fields = ['id', 'created_at'] # These fields cannot be modified by the client.
+        read_only_fields = ['id', 'created_at', 'user'] # These fields cannot be modified by the client.
 
 
 class SelfCareSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class SelfCareSerializer(serializers.ModelSerializer):
     class Meta:
         model = SelfCare
         fields = ['id', 'user', 'activity', 'category', 'created_at']
-        read_only_fields = ['id', 'created_at']
+        read_only_fields = ['id', 'created_at', 'user']
 
 
 class AnonymousPostSerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class AnonymousPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnonymousPost
         fields = ['id', 'category', 'content', 'created_at']  #user is fully anonymous (not showing in the output)
-        read_only_fields = ['id', 'created_at']
+        read_only_fields = ['id', 'created_at', 'user']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -34,4 +34,4 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'post', 'content', 'created_at'] #user is fully anonymous (not showing in the output)
-        read_only_fields = ['id', 'created_at']
+        read_only_fields = ['id', 'created_at', 'user']
