@@ -24,7 +24,7 @@ class AnonymousPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnonymousPost
-        fields = ['id', 'category', 'content', 'created_at']  #user is fully anonymous (not showing in the output)
+        fields = ['id', 'user', 'category', 'content', 'created_at']  #user is fully anonymous (not showing in the output)
         read_only_fields = ['id', 'created_at', 'user']
 
 
@@ -33,5 +33,5 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'content', 'created_at'] #user is fully anonymous (not showing in the output)
+        fields = ['id', 'user', 'post', 'content', 'created_at'] #user is fully anonymous (not showing in the output)
         read_only_fields = ['id', 'created_at', 'user']
